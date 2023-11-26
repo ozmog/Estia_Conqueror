@@ -7,10 +7,12 @@ class Entites(object):
         self.sante = 100
         self.sante_max = 100
         self.force = 10
+        self.technique = 10
+        self.defence = 10
         self.race = None
-        self.taille_inventaire = 1
-        self.inventaire = []
-        self.position = [0, 0]
+        self.taille_inventaire = 5
+        self.inventaire = [None for i in range(self.taille_inventaire)]
+        self.position = [0, 0, 0]
         self.xp = 0
         self.level = level
         self.xp_neccessaire = 5
