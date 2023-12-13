@@ -1,25 +1,30 @@
 from Entites import Entites
        
-class gobelin(Entites):
+class Gobelin(Entites):
     def __init__(self):
         Entites.__init__(self)
     
-class squelette(Entites):
+class Squelette(Entites):
     def __init__(self):
         Entites.__init__(self)
+        self.nom_classe = "sqeulette"
     
-class orc(Entites):
+class Orc(Entites):
     def __init__(self):
         Entites.__init__(self)
+        self.nom_classe = "Orc"
     
-class vampire(Entites):
+class Vampire(Entites):
     def __init__(self):
         Entites.__init__(self)
+        self.nom_classe = "Vampire"
     
-class elf_noir(Entites):
+class Elf_noir(Entites):
     def __init__(self):
         Entites.__init__(self)
+        self.nom_classe = "Elf Noir"
         
 class trouver_race_archer(Entites):
     def __init__(self):
         Entites.__init__(self)
+        self.nom_classe = ""
