@@ -2,13 +2,13 @@ from Arme import Arme
 from Armure import Armure
 
 class Entites(object):
-    def __init__(self, arme = Arme("mains"), armure = Armure(), level : int = 0) -> None:
+    def __init__(self, arme = None, armure = None, level : int = 0) -> None:
         self.nom = ""
         self.sante = 100
         self.sante_max = 100
         self.force = 10
         self.technique = 10
-        self.defence = 10
+        self.defense = 10
         self.race = None
         self.taille_inventaire = 5
         self.inventaire = [None for i in range(self.taille_inventaire)]
@@ -29,4 +29,5 @@ class Entites(object):
             self.xp_neccessaire = int((self.xp_neccessaire * 1.2 + 12) // 1)
             return True
         return False
+    
     
