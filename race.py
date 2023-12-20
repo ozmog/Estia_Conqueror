@@ -24,7 +24,7 @@ class Elf_noir(Entites):
         Entites.__init__(self)
         self.nom_classe = "Elf Noir"
         
-class trouver_race_archer(Entites):
+class centaure(Entites):
     def __init__(self):
         Entites.__init__(self)
         self.nom_classe = ""
