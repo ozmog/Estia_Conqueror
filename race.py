@@ -3,6 +3,7 @@ from Entites import Entites
 class Gobelin(Entites):
     def __init__(self):
         Entites.__init__(self)
+        self.force=5
     
 class Squelette(Entites):
     def __init__(self):

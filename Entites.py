@@ -18,7 +18,6 @@ class Entites(object):
         self.xp_neccessaire = 5
         self.arme = arme
         self.armure = armure
-        self.nom_skin = ""
         self.coins = 0
         self.diamants = 0
 
@@ -32,6 +31,10 @@ class Entites(object):
             self.xp = 0
             self.level += 1
             self.xp_neccessaire = int((self.xp_neccessaire * 1.2 + 12) // 1)
+            self.sante_max += 5
+            self.sante += 5
+            n = input("1 : augmenter la force\n2 : augmenter defense")
+            if n == 1 or n == "force" or n == "augmenter la force":
             return True
         return False
     
@@ -47,7 +50,7 @@ class Entites(object):
             self.xp += 5 if self.race == "goblin" else 2
             if self.xp <= 20:
                 self.xp -= 20
-                self.lvl += 1
+                self.level += 1
                 self.force += 2
         
         
