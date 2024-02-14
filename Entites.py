@@ -22,6 +22,11 @@ class Entites(object):
         self.coins = 0
         self.diamants = 0
 
+    def en_vie(self):
+        if self.sante <= 0:
+            return False
+        return True
+    
     def level_up(self):
         if self.xp_neccessaire == self.xp:
             self.xp = 0
@@ -30,4 +35,19 @@ class Entites(object):
             return True
         return False
     
-    
+    def attaque(self, ennemi):
+        ennemi.sante -= (self.force + self.arme.degats) // self.armure.defense
+        self.arme.durabilités -= 1
+        if ennemi.sante <= 0:
+            if self.race == "vampire":
+                self.sante += 5
+                if self.sante < 80:
+                    self.sante = 80
+            ennemi.mort = True
+            self.xp += 5 if self.race == "goblin" else 2
+            if self.xp <= 20:
+                self.xp -= 20
+                self.lvl += 1
+                self.force += 2
+        
+        
