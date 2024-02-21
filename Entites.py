@@ -20,6 +20,7 @@ class Entites(object):
         self.armure = armure
         self.coins = 0
         self.diamants = 0
+        self.xp_drop = 0
 
     def en_vie(self):
         if self.sante <= 0:
@@ -35,22 +36,19 @@ class Entites(object):
             self.sante += 5
             n = input("1 : augmenter la force\n2 : augmenter defense")
             if n == 1 or n == "force" or n == "augmenter la force":
-            return True
+                return True
         return False
     
     def attaque(self, ennemi):
-        ennemi.sante -= (self.force + self.arme.degats) // self.armure.defense
+        ennemi.sante -= (self.force + self.arme.degats) - ennemi.armure.defense
         self.arme.durabilités -= 1
         if ennemi.sante <= 0:
             if self.race == "vampire":
-                self.sante += 5
-                if self.sante < 80:
-                    self.sante = 80
+                self.sante += (self.sante_max/100)*10
+                if self.sante < self.sante_max:
+                    self.sante = self.sante_max
             ennemi.mort = True
-            self.xp += 5 if self.race == "goblin" else 2
-            if self.xp <= 20:
-                self.xp -= 20
-                self.level += 1
-                self.force += 2
+            self.xp += ennemi.xp_drop*2 if self.race == "goblin" else ennemi.xp_drop
+            self.level_up()
         
         

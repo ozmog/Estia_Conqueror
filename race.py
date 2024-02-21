@@ -19,6 +19,7 @@ class Vampire(Entites):
     def __init__(self):
         Entites.__init__(self)
         self.nom_classe = "Vampire"
+        self.sante_max = 80
     
 class Elf_noir(Entites):
     def __init__(self):
