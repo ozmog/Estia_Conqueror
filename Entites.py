@@ -12,7 +12,8 @@ class Entites(object):
         self.race = None
         self.taille_inventaire = 5
         self.inventaire = [None for i in range(self.taille_inventaire)]
-        self.position = [0, 0, 0]
+        self.position = [0, 0]
+        self.distance_attaque = 3
         self.xp = 0
         self.level = level
         self.xp_neccessaire = 5
@@ -40,13 +41,14 @@ class Entites(object):
         return False
     
     def attaque(self, ennemi):
-        ennemi.sante -= (self.force + self.arme.degats) - ennemi.armure.defense
-        self.arme.durabilités -= 1
-        if ennemi.sante <= 0:
-            if self.race == "vampire":
-                self.sante += (self.sante_max/100)*10
-                if self.sante < self.sante_max:
-                    self.sante = self.sante_max
+        if abs(self.position[0] - ennemi.position[0]) <= self.distance_attaque and abs(self.position[1] - ennemi.position[1]) <= self.distance_attaque :
+            ennemi.sante -= (self.force + self.arme.degats) - ennemi.armure.defense
+            self.arme.durabilités -= 1
+            if ennemi.sante <= 0:
+                if self.race == "vampire":
+                    self.sante += (self.sante_max/100)*10
+                    if self.sante < self.sante_max:
+                        self.sante = self.sante_max
             ennemi.mort = True
             self.xp += ennemi.xp_drop*2 if self.race == "goblin" else ennemi.xp_drop
             self.level_up()
