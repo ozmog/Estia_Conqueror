@@ -1,27 +1,45 @@
 from Arme import Arme
 from Armure import Armure
+from inventaire import Inventaire
 
 class Entites(object):
-    def __init__(self, arme = None, armure = None, level : int = 0) -> None:
+    def __init__(self, arme = None, armure = None, level : int = 0, inventaire = Inventaire()) -> None:
         self.nom = ""
+
+        # stats
         self.sante = 100
         self.sante_max = 100
         self.force = 10
         self.technique = 10
         self.defense = 10
+        self.distance_attaque = 75
         self.race = None
-        self.taille_inventaire = 5
-        self.inventaire = [None for i in range(self.taille_inventaire)]
-        self.position = [0, 0]
-        self.distance_attaque = 3
-        self.xp = 0
-        self.level = level
-        self.xp_neccessaire = 5
+
+        #
         self.arme = arme
         self.armure = armure
+        self.inventaire = inventaire
+        self.position = [0, 0]
+        self.taille = 50
+        self.vitesse = 6
+
+        # argent et experience
+        self.xp = 0
+        self.xp_neccessaire = 5
+        self.level = level
         self.coins = 0
         self.diamants = 0
         self.xp_drop = 0
+
+        # skin de base 
+        self.img_psL = "player\player with bg\player_standing_L.png"
+        self.img_psR = "player\player with bg\player_standing_R.png"
+        self.img_psL_running_1 = "player\player with bg\player_standing_L_running_1.png"
+        self.img_psL_running_2 = "player\player with bg\player_standing_L_running_2.png"
+        self.img_psR_running_1 = "player\player with bg\player_standing_R_running_1.png"
+        self.img_psR_running_2 = "player\player with bg\player_standing_R_running_2.png"
+        self.player_img_affiché = "player\player with bg\player_standing_L.png"
+
 
     def en_vie(self):
         if self.sante <= 0:
