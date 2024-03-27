@@ -65,7 +65,7 @@ class Entites(object):
             if ennemi.sante <= 0:
                 if self.race == "vampire":
                     self.sante += (self.sante_max/100)*10
-                    if self.sante < self.sante_max:
+                    if self.sante > self.sante_max:
                         self.sante = self.sante_max
                 ennemi.mort = True
                 self.xp += ennemi.xp_drop*2 if self.race == "goblin" else ennemi.xp_drop
