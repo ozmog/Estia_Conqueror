@@ -1,9 +1,13 @@
 from Arme import Arme
 from Armure import Armure
-from inventaire import Inventaire
+from random import randint as rd
+
+
+arme = Arme()
+armure = Armure()
 
 class Entites(object):
-    def __init__(self, arme = None, armure = None, level : int = 0, inventaire = Inventaire()) -> None:
+    def __init__(self, arme = arme, armure = armure, level : int = 0) -> None:
         self.nom = ""
 
         # stats
@@ -18,10 +22,10 @@ class Entites(object):
         #
         self.arme = arme
         self.armure = armure
-        self.inventaire = inventaire
+        self.inventaire = []
         self.position = [0, 0]
-        self.taille = 50
-        self.vitesse = 6
+        self.taille = 75
+        self.vitesse = 10
 
         # argent et experience
         self.xp = 0
@@ -32,13 +36,13 @@ class Entites(object):
         self.xp_drop = 0
 
         # skin de base 
-        self.img_psL = "player\player with bg\player_standing_L.png"
-        self.img_psR = "player\player with bg\player_standing_R.png"
-        self.img_psL_running_1 = "player\player with bg\player_standing_L_running_1.png"
-        self.img_psL_running_2 = "player\player with bg\player_standing_L_running_2.png"
-        self.img_psR_running_1 = "player\player with bg\player_standing_R_running_1.png"
-        self.img_psR_running_2 = "player\player with bg\player_standing_R_running_2.png"
-        self.player_img_affiché = "player\player with bg\player_standing_L.png"
+        self.img_psL = "player\squelette\debout_g.png"
+        self.img_psR = "player\squelette\debout_d.png"
+        self.img_psL_running_1 = "player\squelette\court_g_1.png"
+        self.img_psL_running_2 = "player\squelette\court_g_2.png"
+        self.img_psR_running_1 = "player\squelette\court_d_1.png"
+        self.img_psR_running_2 = "player\squelette\court_d_2.png"
+        self.player_img_affiché = "player\squelette\debout_g.png"
 
 
     def en_vie(self):
@@ -58,17 +62,25 @@ class Entites(object):
                 return True
         return False
     
+    def looting(self,ennemi):
+        for chance in ennemi.loot:
+            temp = rd(1,100)
+            if temp <= chance:
+                self.inventaire.append(ennemi.loot[chance])
+
+    
     def attaque(self, ennemi):
         if abs(self.position[0] - ennemi.position[0]) <= self.distance_attaque and abs(self.position[1] - ennemi.position[1]) <= self.distance_attaque :
             ennemi.sante -= (self.force + self.arme.degats) - ennemi.armure.defense
-            self.arme.durabilités -= 1
             if ennemi.sante <= 0:
+                self.xp += ennemi.xp_drop*2 if self.race == "goblin" else ennemi.xp_drop
+                self.level_up()
                 if self.race == "vampire":
                     self.sante += (self.sante_max/100)*10
                     if self.sante > self.sante_max:
                         self.sante = self.sante_max
-                ennemi.mort = True
-                self.xp += ennemi.xp_drop*2 if self.race == "goblin" else ennemi.xp_drop
-                self.level_up()
-        
-        
+
+    def soigner(self, niveau):
+        self.sante += niveau
+        if self.sante > self.sante_max:
+            self.sante = self.sante_max

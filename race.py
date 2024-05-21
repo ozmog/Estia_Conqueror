@@ -3,12 +3,13 @@ from Entites import Entites
 class Gobelin(Entites):
     def __init__(self):
         Entites.__init__(self)
+        self.nom_classe = "Gobelin"
         self.force=5
     
 class Squelette(Entites):
     def __init__(self):
         Entites.__init__(self)
-        self.nom_classe = "sqeulette"
+        self.nom_classe = "Squelette"
     
 class Orc(Entites):
     def __init__(self):
@@ -30,8 +31,8 @@ class Elf_noir(Entites):
         self.nom_classe = "Elf Noir"
         self.sante= 75
         
-class centaure(Entites):
+class Centaure(Entites):
     def __init__(self):
         Entites.__init__(self)
-        self.nom_classe = ""
+        self.nom_classe = "Centaure"
         self.distance_attaque = 5
